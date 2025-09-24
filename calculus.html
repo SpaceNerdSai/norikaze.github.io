@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Calculus</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f2f2f2;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        .section {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        input[type="text"], input[type="number"] {
+            width: 100px;
+            padding: 5px;
+        }
+        button {
+            padding: 5px 10px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Calculus Learning</h1>
+
+    <div class="section">
+        <h2>1. Definitions</h2>
+        <p><strong>Derivative:</strong> The rate at which a function changes at any point. Notation: <em>f'(x)</em> or <em>dy/dx</em>.</p>
+        <p><strong>Integral:</strong> The area under a curve of a function. Notation: ∫f(x)dx.</p>
+    </div>
+
+    <div class="section">
+        <h2>2. Formulas</h2>
+        <ul>
+            <li>Derivative of xⁿ: <em>d/dx(xⁿ) = n*xⁿ⁻¹</em></li>
+            <li>Derivative of sin(x): <em>d/dx(sin(x)) = cos(x)</em></li>
+            <li>Integral of xⁿ: <em>∫xⁿ dx = xⁿ⁺¹ / (n+1) + C</em></li>
+            <li>Integral of eˣ: <em>∫eˣ dx = eˣ + C</em></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>3. Example Calculation</h2>
+        <p>Derivative of f(x) = x³:</p>
+        <p>f'(x) = 3x²</p>
+    </div>
+
+    <div class="section">
+        <h2>4. Try it Yourself!</h2>
+        <p>Find derivative of f(x) = x²:</p>
+        <input type="text" id="userAnswer" placeholder="Your answer">
+        <button onclick="checkDerivative()">Check</button>
+        <p id="result"></p>
+    </div>
+
+    <div class="section">
+        <h2>5. Integration Calculator (Polynomials)</h2>
+        <p>Enter a function like x^2, x^3, 5x^4, etc.</p>
+        <input type="text" id="integralInput" placeholder="e.g. x^2">
+        <button onclick="calculateIntegral()">Integrate</button>
+        <p id="integralResult"></p>
+    </div>
+
+    <script>
+        function checkDerivative() {
+            let answer = document.getElementById('userAnswer').value.trim();
+            if (answer === '2x') {
+                document.getElementById('result').innerText = 'Correct! ✅';
+            } else {
+                document.getElementById('result').innerText = 'Try again! ❌';
+            }
+        }
+
+        function calculateIntegral() {
+            let input = document.getElementById('integralInput').value.trim();
+            
+            // Match polynomial like "5x^3" or "x^2"
+            let match = input.match(/^(\d*)x\^(\d+)$/);
+            if (!match) {
+                document.getElementById('integralResult').innerText = 'Invalid input. Use format like 3x^2';
+                return;
+            }
+
+            let coefficient = parseInt(match[1] || '1');
+            let power = parseInt(match[2]);
+
+            let newPower = power + 1;
+            let newCoefficient = coefficient / newPower;
+
+            document.getElementById('integralResult').innerText = `∫${input} dx = ${newCoefficient}x^${newPower} + C`;
+        }
+    </script>
+</body>
+</html>
